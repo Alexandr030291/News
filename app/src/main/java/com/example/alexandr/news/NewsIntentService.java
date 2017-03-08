@@ -30,7 +30,8 @@ public class NewsIntentService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
-            if (ACTION_NEWS.equals(action)) {
+            autoUpdate = ACTION_NEWS.equals(action);
+            if (autoUpdate) {
                 final ResultReceiver receiver = intent.getParcelableExtra(EXTRA_NEWS_RESULT_RECEIVER);
                 while (intent.getBooleanExtra(EXTRA_FLAG,false)){
                     handleActionNews(receiver);
