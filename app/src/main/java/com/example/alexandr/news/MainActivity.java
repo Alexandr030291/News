@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements ServiceHelper.New
             newRequestID();
 
     private final View.OnClickListener onAuto = (view) ->{
-        NewsIntentService.setAutoUpdate(!turnOn);
+ //       NewsIntentService.setAutoUpdate(!turnOn);
         turnOn = NewsIntentService.isAutoUpdate();
         drawAutoButton();
         if (turnOn) newRequestID();
@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements ServiceHelper.New
 
         buttonUpdate = (Button)findViewById(R.id.btn_update);
         buttonUpdate.setOnClickListener(onUpdate);
+
+        newRequestID();
     }
 
     @Override
