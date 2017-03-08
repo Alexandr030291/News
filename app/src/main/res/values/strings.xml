@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">News</string>
+    <string name="Category1">Auto</string>
+    <string name="Category2">It</string>
+    <string name="Category3">Health</string>
+    <string name="Category4">All</string>
+    <string name="turn_on">Auto update On</string>
+    <string name="turn_off">Auto update Off</string>
+</resources>
