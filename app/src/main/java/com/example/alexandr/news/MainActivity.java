@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements ServiceHelper.New
 
     @Override
     protected void onStop(){
-        ServiceHelper.getInstance().removeListener(mRequestId);
+        ServiceHelper.getInstance().removeListenerKill(mRequestId);
         super.onStop();
     }
 

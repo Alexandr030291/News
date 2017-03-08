@@ -10,7 +10,7 @@ import java.io.IOException;
 public class NewsIntentService extends IntentService {
 
     private static boolean autoUpdate;
-    private final int SLEEP = 10*60*1000*1000;
+    private final int SLEEP = 60*60*1000*1000;
     public final static int RESULT_SUCCESS = 1;
     public final static int RESULT_ERROR = 2;
     public final static String ACTION_NEWS = "action.NEWS";
@@ -53,7 +53,7 @@ public class NewsIntentService extends IntentService {
         final Bundle data = new Bundle();
         try {
             data.putBoolean(EXTRA_NEWS_RESULT, NewsProcessor.processUpdate(this));
-            receiver.send(RESULT_ERROR, data);
+            receiver.send(RESULT_SUCCESS, data);
         }catch (IOException ex){
             data.putString(EXTRA_NEWS_RESULT, ex.getMessage());
             receiver.send(RESULT_ERROR,data);
