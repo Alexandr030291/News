@@ -10,12 +10,13 @@ import java.io.IOException;
 public class NewsIntentService extends IntentService {
 
     private static boolean autoUpdate;
-    private final int SLEEP = 1*60*1000;
+    private final int SLEEP = 10*60*1000*1000;
     public final static int RESULT_SUCCESS = 1;
     public final static int RESULT_ERROR = 2;
     public final static String ACTION_NEWS = "action.NEWS";
     public final static String EXTRA_NEWS_RESULT_RECEIVER = "extra.EXTRA_NEWS_RESULT_RECEIVER";
     public final static String EXTRA_NEWS_RESULT = "extra.EXTRA_NEWS_RESULT";
+    public final static String EXTRA_FLAG = "extra.EXTRA_NEWS_FLAG";
 
     public NewsIntentService() {
         super("NewsIntentService");
@@ -28,17 +29,24 @@ public class NewsIntentService extends IntentService {
             final String action = intent.getAction();
             if (ACTION_NEWS.equals(action)) {
                 final ResultReceiver receiver = intent.getParcelableExtra(EXTRA_NEWS_RESULT_RECEIVER);
+                autoUpdate = intent.getBooleanExtra(EXTRA_FLAG,false);
+                while (autoUpdate){
+                    handleActionNews(receiver);
+                    int i=0;
+                    while (i<SLEEP)
+                        i++;
+                }
                 handleActionNews(receiver);
             }
         }
     }
 
-    public static boolean isAutoUpdate() {
-        return autoUpdate;
-    }
-
     public static void setAutoUpdate(boolean autoUpdate) {
         NewsIntentService.autoUpdate = autoUpdate;
+    }
+
+    public static boolean isAutoUpdate() {
+        return autoUpdate;
     }
 
     private void handleActionNews(final ResultReceiver receiver) {

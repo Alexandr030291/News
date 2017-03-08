@@ -22,7 +22,7 @@ class ServiceHelper {
         return instance;
     }
 
-    int makeLikeNew(final Context context, final NewsResultListener listener){
+    int makeLikeNew(final Context context, final boolean turnON,final NewsResultListener listener){
         final NewsResultReceiver receiver = new NewsResultReceiver(mIdCounter, new Handler());
         receiver.setListener(listener);
         mResultReceivers.put(mIdCounter,receiver);
@@ -30,6 +30,7 @@ class ServiceHelper {
         Intent intent = new Intent(context, NewsIntentService.class);
         intent.setAction(NewsIntentService.ACTION_NEWS);
         intent.putExtra(NewsIntentService.EXTRA_NEWS_RESULT_RECEIVER,receiver);
+        intent.putExtra(NewsIntentService.EXTRA_FLAG,turnON);
         context.startService(intent);
 
         return mIdCounter++;

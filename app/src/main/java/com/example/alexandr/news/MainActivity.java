@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements ServiceHelper.New
     private int mRequestId;
     private boolean turnOn;
     private Button buttonAuto;
+    private Button buttonUpdate;
     private TextView textTextTitle;
     private TextView textTextNews;
     private TextView textTextDate;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements ServiceHelper.New
 
     private void newRequestID(){
         mRequestId = (mRequestId == 0)?
-                ServiceHelper.getInstance().makeLikeNew(this, this):mRequestId;
+                ServiceHelper.getInstance().makeLikeNew(this, turnOn,this):mRequestId;
     }
 
     @Override
@@ -57,11 +58,13 @@ public class MainActivity extends AppCompatActivity implements ServiceHelper.New
         textTextDate = (TextView) findViewById(R.id.time);
 
         findViewById(R.id.btn_settings).setOnClickListener(onSettings);
+        findViewById(R.id.btn_update).setOnClickListener(onUpdate);
 
         buttonAuto = (Button) findViewById(R.id.btn_auto);
         buttonAuto.setOnClickListener(onAuto);
 
-        findViewById(R.id.btn_update).setOnClickListener(onUpdate);
+        buttonUpdate = (Button)findViewById(R.id.btn_update);
+        buttonUpdate.setOnClickListener(onUpdate);
     }
 
     @Override
@@ -80,6 +83,5 @@ public class MainActivity extends AppCompatActivity implements ServiceHelper.New
             textTextDate.setText(DateFormat.format("MM/dd/yyyy HH:mm:ss", new Date(news.getDate())).toString());
             textTextNews.setText(news.getBody());
         }
-
     }
 }
